@@ -114,20 +114,20 @@
 // définies.
 
 
-    const panels = document.querySelectorAll('.panel')
+    const panels = document.querySelector('.panels');
 
-    const togglePanel = (p, e) => {
-      p.classList.toggle('open');
+    function toggleOpen(){
+
+      event.preventDefault();
+      const clickedChildNode = event.target.nodeName == "DIV" ? event.target : event.target.parentNode;
+      clickedChildNode.classList.toggle('open');
+
+      setTimeout(function(){
+        clickedChildNode.classList.toggle('open-active');
+      }, 500);
     }
 
-    const toggleText = (p, e) => {
-      if (e.propertyName.includes('flex')) p.classList.toggle('open-active');
-    }
-
-    panels.forEach(panel => {
-      panel.addEventListener('click', togglePanel.bind(null, panel))
-      panel.addEventListener('transitionend', toggleText.bind(null, panel))
-    });
+    panels.addEventListener("click", toggleOpen);
 
   </script>
 
